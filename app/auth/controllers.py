@@ -1,6 +1,6 @@
 from flask import Flask,Blueprint,render_template
 
-module =Blueprint('auth',__name__,url_prefix='/auth')
+module =Blueprint('auth',__name__,url_prefix='/auth',static_folder='static' ,template_folder='templates')
 
 @module.route('/')
 def auth():
