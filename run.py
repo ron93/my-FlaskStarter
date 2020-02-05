@@ -1,6 +1,3 @@
-#!venv/bin/python
+#! /usr/bin/env python
 from app import app
-app.config.from_object('config.DevelopmentConfig')
-
-
-app.run(host='0.0.0.0', port=4000, debug=True)
+app.run(debug=True,host="0.0.0.0",port=8080)

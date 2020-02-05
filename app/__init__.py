@@ -1,28 +1,14 @@
-from flask import Flask, render_template,app
-import config 
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+import os
 
-import admin,home,auth
-
-from app.home.controllers import home_mod
-from app.admin.controllers import admin_mod
-from app.auth.controllers import auth_mod
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-# configurations
-app.config.from_object('config.DevelopmentConfig')
+app.config['SECRET_KEY'] = 'super secret key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/mydatabase.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'mydatabase.db')
+db = SQLAlchemy(app)
 
-
-
-
-
-# register blueprints
-
-# home page blueprint
-app.register_blueprint(home.controllers.home_mod)
-
-# admin blueprint
-app.register_blueprint(admin.controllers.admin_mod)
-
-#auth blueprint
-app.register_blueprint(auth.controllers.auth_mod)
-
+app.config.from_object(__name__)
+from app import views
